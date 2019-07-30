@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Gossip de <%= gossip[0] %></title>
+  </head>
+  <body>
+    <h1>Page potin</h1>
+      <!-- Displays gossip, defined with Get method -->
+      <p>Voici la page du potin de <%= gossip[0] %></p>
+      <p>Son auteur : <%= gossip[0] %></p>
+      <p>Le contenu du potin : <%= gossip[1] %></p>
+      <p><a href="/">Tous les potins</a></p>
+      <p><a href="/gossips/<%= params['id'] %>/edit">Modifier</a></p>
+      <h2>Commentaires</h2>
+
+      <!-- Displays comments for current gossip -->
+      <% if comments.size != 0
+           comments.each do |comment| %>
+           <p><%= comment.author %> : <i><%= comment.content %></i></p>
+        <% end
+         else %>
+           <p><i>Aucun commentaire pour le moment...</i></p>
+      <% end %>
+
+      <h3>Ajouter un nouveau commentaire</h3>
+      <!-- New comment form - Post method -->
+      <form action='/gossips/<%= params['id'] %>/comment' method='POST'>
+      Saisi ici ton nom :  <input type='text' name='gossip_author'/><br/>
+      Balance ton potin : <input type='text' name='gossip_content'/><br/>
+      <input type='submit'/>
+    </form>
+  </body>
+</html>
